@@ -23,7 +23,8 @@ jobs:
       fail-fast: false # Ensures that if one build fails, the others will still run
       matrix:
         include:
-          - path: "adk/python/weather-agent"
+          - name: "weather-agent"
+            path: "adk/python/weather-agent"
 
     steps:
       - name: 'Checkout'
@@ -45,4 +46,6 @@ jobs:
       - name: 'Docker Push'
         working-directory: ${{ matrix.path }}
         run: |
+          tag=$(git describe --tags --always)
+          export IMG="${{ env.GCP_LOCATION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_REPOSITORY }}/${{ matrix.name }}:${tag}"
           make docker-push

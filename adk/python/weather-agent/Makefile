@@ -1,26 +1,32 @@
-.PHONY: all build run docker-build docker-run
-
-IMAGE_NAME ?= weather-agent
+IMG ?= weather-agent
 GCP_LOCATION ?= europe-west3
 GCP_PROJECT_ID ?= qaware-paal
 GCP_REPOSITORY ?= agentic-layer
+PLATFORMS ?= linux/arm64,linux/amd64
 
+.PHONY: all
 all: docker-build
 
+.PHONY: build
 build:
 	uv sync
 
+.PHONY: run
 run: build
 	uv run uvicorn main:app
 
+.PHONY: docker-build
 docker-build:
-	docker build -t $(IMAGE_NAME) .
+	docker build -t $(IMG) .
 
+.PHONY: docker-run
 docker-run: docker-build
 	@echo "Agent Card URL: http://127.0.0.1:8000/.well-known/agent-card.json"
-	docker run --rm -it -p 8000:8000 $(IMAGE_NAME)
+	docker run --rm -it -p 8000:8000 $(IMG)
 
+.PHONY: docker-push
 docker-push: docker-build
-	$(eval image_name = $(GCP_LOCATION)-docker.pkg.dev/$(GCP_PROJECT_ID)/$(GCP_REPOSITORY)/$(IMAGE_NAME):$(shell git describe --tags --always))
-	docker tag $(IMAGE_NAME) $(image_name)
-	docker push $(image_name)
+	- docker buildx create --name agent-builder
+	docker buildx use agent-builder
+	- docker buildx build --push --platform=$(PLATFORMS) --tag ${IMG} .
+	- docker buildx rm agent-builder
