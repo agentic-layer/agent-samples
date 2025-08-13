@@ -1,0 +1,14 @@
+[project]
+name = "weather-agent"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "google-adk[a2a]>=1.10.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+package = false
