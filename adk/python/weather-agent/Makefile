@@ -1,4 +1,6 @@
-IMG ?= weather-agent
+VERSION ?= $(shell git describe --tags --always | sed 's/^v//')
+IMAGE_TAG_BASE ?= eu.gcr.io/agentic-layer/weather-agent
+IMG ?= $(IMAGE_TAG_BASE):$(VERSION)
 GCP_LOCATION ?= europe-west3
 GCP_PROJECT_ID ?= qaware-paal
 GCP_REPOSITORY ?= agentic-layer
@@ -25,8 +27,7 @@ docker-run: docker-build
 	docker run --rm -it -p 8000:8000 $(IMG)
 
 .PHONY: docker-push
-docker-push: docker-build
+docker-push:
 	- docker buildx create --name agent-builder
 	docker buildx use agent-builder
-	- docker buildx build --push --platform=$(PLATFORMS) --tag ${IMG} .
-	- docker buildx rm agent-builder
+	docker buildx build --push --platform=$(PLATFORMS) --tag ${IMG} .
