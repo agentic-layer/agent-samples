@@ -1,5 +1,5 @@
 VERSION ?= $(shell echo "$$(git rev-parse --abbrev-ref HEAD | sed 's|/|-|g')-$$(git rev-parse --short=7 HEAD)-$$(date +%s)")
-IMAGE_TAG_BASE ?= eu.gcr.io/agentic-layer/weather-agent
+IMAGE_TAG_BASE ?= eu.gcr.io/agentic-layer/delegate-agent
 IMG ?= $(IMAGE_TAG_BASE):$(VERSION)
 GCP_LOCATION ?= europe-west3
 GCP_PROJECT_ID ?= qaware-paal
@@ -15,7 +15,7 @@ build:
 
 .PHONY: run
 run: build
-	uv run uvicorn main:app --port 8001
+	uv run uvicorn main:app
 
 .PHONY: docker-build
 docker-build:
@@ -23,8 +23,8 @@ docker-build:
 
 .PHONY: docker-run
 docker-run: docker-build
-	@echo "Agent Card URL: http://127.0.0.1:8001/.well-known/agent-card.json"
-	docker run --rm -it -p 8001:8000 $(IMG)
+	@echo "Agent Card URL: http://127.0.0.1:8000/.well-known/agent-card.json"
+	docker run --rm -it -p 8000:8000 $(IMG)
 
 .PHONY: docker-push
 docker-push:

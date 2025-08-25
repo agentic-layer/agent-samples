@@ -34,12 +34,12 @@ make docker-run
 
 After successful start, the agent will be available at:
 
-* **Server**: http://127.0.0.1:8000
-* **Agent Card**: http://127.0.0.1:8000/.well-known/agent-card.json
+* **Server**: http://127.0.0.1:8001
+* **Agent Card**: http://127.0.0.1:8001/.well-known/agent-card.json
 
 Ask the agent a question using curl:
 ```shell
-curl http://localhost:8000/ \
+curl http://localhost:8001/ \
     -H "Content-Type: application/json" \
     -d '{
       "jsonrpc": "2.0",
