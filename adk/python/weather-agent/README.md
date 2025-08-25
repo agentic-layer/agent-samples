@@ -18,6 +18,11 @@ Before you begin, ensure you have the following tools installed:
 
 ## Usage
 
+Copy the `.env` template and add the Google API key:
+```shell
+cp .env.example .env
+```
+
 Run the agent with:
 
 ```shell
@@ -31,6 +36,30 @@ After successful start, the agent will be available at:
 
 * **Server**: http://127.0.0.1:8000
 * **Agent Card**: http://127.0.0.1:8000/.well-known/agent-card.json
+
+Ask the agent a question using curl:
+```shell
+curl http://localhost:8000/ \
+    -H "Content-Type: application/json" \
+    -d '{
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "message/send",
+      "params": {
+        "message": {
+          "role": "agent",
+          "parts": [
+            {
+              "kind": "text",
+              "text": "What is the weather in New York?"
+            }
+          ],
+          "messageId": "9229e770-767c-417b-a0b0-f0741243c589"
+        },
+        "metadata": {}
+      }
+    }' | jq
+```
 
 ## Configuration
 
