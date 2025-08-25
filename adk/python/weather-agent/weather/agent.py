@@ -6,6 +6,7 @@ import datetime
 from zoneinfo import ZoneInfo
 
 from google.adk.agents import Agent
+from google.adk.models.lite_llm import LiteLlm
 
 
 def get_weather(city: str) -> dict:
@@ -62,7 +63,7 @@ def get_current_time(city: str) -> dict:
 
 root_agent = Agent(
     name="weather_time_agent",
-    model="gemini-2.0-flash",
+    model=LiteLlm("gemini/gemini-2.0-flash"),
     description=(
         "Agent to answer questions about the time and weather in a city."
     ),
