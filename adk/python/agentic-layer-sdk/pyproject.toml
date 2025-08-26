@@ -8,6 +8,7 @@ dependencies = [
     "opentelemetry-exporter-otlp-proto-http",
     "opentelemetry-instrumentation-starlette",
     "openinference-instrumentation-google-adk",
+    "opentelemetry-instrumentation-httpx",
 ]
 
 [build-system]

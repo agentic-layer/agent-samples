@@ -7,6 +7,7 @@ from opentelemetry._logs import set_logger_provider
 from opentelemetry.exporter.otlp.proto.http._log_exporter import OTLPLogExporter
 from opentelemetry.exporter.otlp.proto.http.metric_exporter import OTLPMetricExporter
 from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
+from opentelemetry.instrumentation.httpx import HTTPXClientInstrumentor
 from opentelemetry.sdk import trace as trace_sdk
 from opentelemetry.sdk._logs import LoggerProvider, LoggingHandler
 from opentelemetry.sdk._logs.export import BatchLogRecordProcessor
@@ -24,6 +25,8 @@ def setup_otel():
 
     # Instrument Google ADK using openinference instrumentation
     GoogleADKInstrumentor().instrument()
+    # Instrument HTTPX clients (this also transfers the trace context automatically)
+    HTTPXClientInstrumentor().instrument()
 
     # Logs
     provider = LoggerProvider()

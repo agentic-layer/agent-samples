@@ -40,5 +40,5 @@ root_agent = Agent(
     instruction=(
         "You are a helpful agent who can answer user questions by delegating to sub agents."
     ),
-    sub_agents=create_sub_agents()
+    sub_agents=create_sub_agents(),
 )
