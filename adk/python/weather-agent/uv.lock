@@ -31,9 +31,9 @@ wheels = [
 ]
 
 [[package]]
-name = "agentic-layer-sdk"
+name = "agentic-layer-sdk-adk"
 version = "0.1.0"
-source = { editable = "../agentic-layer-sdk" }
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "google-adk", extra = ["a2a"] },
     { name = "litellm" },
@@ -42,15 +42,9 @@ dependencies = [
     { name = "opentelemetry-instrumentation-httpx" },
     { name = "opentelemetry-instrumentation-starlette" },
 ]
-
-[package.metadata]
-requires-dist = [
-    { name = "google-adk", extras = ["a2a"] },
-    { name = "litellm" },
-    { name = "openinference-instrumentation-google-adk" },
-    { name = "opentelemetry-exporter-otlp-proto-http" },
-    { name = "opentelemetry-instrumentation-httpx" },
-    { name = "opentelemetry-instrumentation-starlette" },
+sdist = { url = "https://files.pythonhosted.org/packages/d4/ba/10d1491eaac22bc81fcbf67e02632ab25c8ae1bae88ebaeb707e3e1887f5/agentic_layer_sdk_adk-0.1.0.tar.gz", hash = "sha256:70d82958d7a8d94e4f17dcaba904e5e2c2a43d0e1aa63bc745ce1fc2e74e746b", size = 3931, upload-time = "2025-08-27T19:10:47.959Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/07/59/cb4f9f6fcc69e228c7ab6a8584a3f4f38a77be95e676234d3d5205486a55/agentic_layer_sdk_adk-0.1.0-py2.py3-none-any.whl", hash = "sha256:3cef7fd69fb36349746b51d16482baa2bc9256e3d4ca3a5ebf42ea87a3bd667b", size = 2410, upload-time = "2025-08-27T19:10:46.753Z" },
 ]
 
 [[package]]
@@ -2122,11 +2116,11 @@ name = "weather-agent"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
-    { name = "agentic-layer-sdk" },
+    { name = "agentic-layer-sdk-adk" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "agentic-layer-sdk", editable = "../agentic-layer-sdk" }]
+requires-dist = [{ name = "agentic-layer-sdk-adk", specifier = ">=0.1.0" }]
 
 [[package]]
 name = "websockets"
