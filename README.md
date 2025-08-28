@@ -25,3 +25,12 @@ When creating a new agent:
 1. Follow the existing project structure, i.e. for a Python ADK based agent under `adk/python/`
 2. Include a `Makefile` with standard targets (`build`, `run`, `docker-build`, `docker-run`)
 3. Add the agent to GitHub workflows for CI/CD
+
+## Development
+
+Tip: If you want to adapt the agentic layer SDK, consider using a local path dependency in the agent's `pyproject.toml`:
+
+```toml
+[tool.uv.sources]
+agentic-layer-sdk-adk = { path = "<path-to-sdk-python>/adk", editable = true }
+```
