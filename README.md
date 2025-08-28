@@ -14,6 +14,7 @@ and tools.
 
 * [Weather Agent](./adk/python/weather-agent/README.md): A simple agent that provides weather information and
   demonstrates basic agent functionality.
+* [Delegate Agent](./adk/python/delegate-agent/README.md): A simple agent that delegates all tasks to sub-agents.
 
 ----
 
