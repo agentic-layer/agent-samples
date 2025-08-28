@@ -1,10 +1,12 @@
 VERSION ?= $(shell git describe --tags --always | sed 's/^v//')
 IMAGE_TAG_BASE ?= eu.gcr.io/agentic-layer/weather-agent
 IMG ?= $(IMAGE_TAG_BASE):$(VERSION)
-GCP_LOCATION ?= europe-west3
-GCP_PROJECT_ID ?= qaware-paal
-GCP_REPOSITORY ?= agentic-layer
 PLATFORMS ?= linux/arm64,linux/amd64
+
+ifneq (,$(wildcard ./.env))
+    include .env
+    export
+endif
 
 .PHONY: all
 all: docker-build
@@ -15,7 +17,7 @@ build:
 
 .PHONY: run
 run: build
-	uv run uvicorn main:app --port 8001
+	uv run uvicorn main:app
 
 .PHONY: docker-build
 docker-build:
@@ -23,8 +25,8 @@ docker-build:
 
 .PHONY: docker-run
 docker-run: docker-build
-	@echo "Agent Card URL: http://127.0.0.1:8001/.well-known/agent-card.json"
-	docker run --rm -it -p 8001:8000 $(IMG)
+	@echo "Agent Card URL: ${A2A_AGENT_CARD_URL}/.well-known/agent-card.json"
+	docker run --rm -it -p ${UVICORN_PORT}:8000 $(IMG)
 
 .PHONY: docker-push
 docker-push:
