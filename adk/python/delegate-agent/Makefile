@@ -1,4 +1,4 @@
-VERSION ?= $(shell echo "$$(git rev-parse --abbrev-ref HEAD | sed 's|/|-|g')-$$(git rev-parse --short=7 HEAD)-$$(date +%s)")
+VERSION ?= $(shell git describe --tags --always | sed 's/^v//')
 IMAGE_TAG_BASE ?= eu.gcr.io/agentic-layer/delegate-agent
 IMG ?= $(IMAGE_TAG_BASE):$(VERSION)
 GCP_LOCATION ?= europe-west3

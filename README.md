@@ -34,3 +34,8 @@ Tip: If you want to adapt the agentic layer SDK, consider using a local path dep
 [tool.uv.sources]
 agentic-layer-sdk-adk = { path = "<path-to-sdk-python>/adk", editable = true }
 ```
+
+## Creating a release
+
+Create and push a GIT tag like `v0.1.0` and GitHub workflows will build and publish the package to PyPI.
+Follow [Semantic Versioning](https://semver.org/).
