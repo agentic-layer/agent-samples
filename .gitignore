@@ -135,7 +135,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
+/.env # allows .env files in subdirectories
 .envrc
 .venv
 env/
