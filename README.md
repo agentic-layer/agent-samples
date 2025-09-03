@@ -1,41 +1,75 @@
-# Agent Samples
+# Agentic Layer Demo
 
-A collection of sample agents that can be deployed to the Agentic Layer and demonstrate different integration patterns
-and tools.
+The Agentic Layer is a collection of open-source tools and Kubernetes operators for the operation of vendor-agnostic AI platforms.
 
-## Table of Contents
+Find out more about the Agentic Layer on our [landing page](http://agentic-layer.ai/) or our [documentation](https://docs.agentic-layer.ai/).
 
-- [Agents](#agents)
-- [Creating New Agents](#creating-new-agents)
+![demo.gif](./demo.gif)
 
-----
+--- 
+The Agentic Layer Demo showcases the following:
 
-## Agents
+- Example AI usecase:
+  - Multiple Agents communicate via the A2A protocol
+  - An agent uses an MCP tool
+- Agentic Layer components:
+  - Observability Dashboard (used to visualize agent-to-agent communication).
 
-* [Weather Agent](./adk/python/weather-agent/README.md): A simple agent that provides weather information and
-  demonstrates basic agent functionality.
-* [Delegate Agent](./adk/python/delegate-agent/README.md): A simple agent that delegates all tasks to sub-agents.
+## Setup
 
-----
+### Prerequisites
 
-## Creating New Agents
+This demo assumes you have the following:
 
-When creating a new agent:
+- Installed Software
+  - Docker (configured to use up to 8GB)
+  - kubectl
+  - [Tilt](https://tilt.dev/)
+- Access to Gemini:
+  - You will need a [Gemini API key](https://ai.google.dev/gemini-api/docs/api-key).
+- Access to a Kubernetes cluster
+  - We recommend using a local cluster, e.g. created via [kind](https://kind.sigs.k8s.io/), [k3s](https://k3s.io/) or [k3d](https://k3d.io/)
+  - If using a non-local Kubernetes cluster, you will need to allow Tilt to use your context (see the [Tilt docs](https://docs.tilt.dev/api.html#api.allow_k8s_contexts))
 
-1. Follow the existing project structure, i.e. for a Python ADK based agent under `adk/python/`
-2. Include a `Makefile` with standard targets (`build`, `run`, `docker-build`, `docker-run`)
-3. Add the agent to GitHub workflows for CI/CD
+### Instructions
 
-## Development
+1. Clone this repo
+1. Set the environment variable `GOOGLE_API_KEY` to your Gemini API key
+1. Set your kube context to point to a local Kubernetes cluster.
+1. Start Tilt
+    ```shell
+    tilt up
+    ```
+1. Wait for all applications to start
+1. Open the Observability Dashboard 
+   - exposed at https://localhost:10005
+1. Prompt the host agent to talk to the other agent via A2A.
+   - Either:
+     1. via cURL (recommended):
+       ```shell
+       curl http://localhost:8000/ \
+       -H "Content-Type: application/json" \
+       -d '{
+         "jsonrpc": "2.0",
+         "id": 1,
+         "method": "message/send",
+         "params": {
+           "message": {
+             "role": "agent",
+             "parts": [
+               {
+                 "kind": "text",
+                 "text": "Please summarize this blog post: https://blog.qaware.de/posts/deepquali/"
+               }
+             ],
+             "messageId": "9229e770-767c-417b-a0b0-f0741243c579",
+             "contextId": "abcd1234-5678-90ab-cdef-1234567890ad"
+           },
+           "metadata": {}
+         }
+       }'
+       ```
+     1. OR from a GUI tool like the [a2a-inspector](https://github.com/a2aproject/a2a-inspector)
+1. Inspect the communication of the agents 
 
-Tip: If you want to adapt the agentic layer SDK, consider using a local path dependency in the agent's `pyproject.toml`:
 
-```toml
-[tool.uv.sources]
-agentic-layer-sdk-adk = { path = "<path-to-sdk-python>/adk", editable = true }
-```
-
-## Creating a release
-
-Create and push a GIT tag like `v0.1.0` and GitHub workflows will build and publish the package to PyPI.
-Follow [Semantic Versioning](https://semver.org/).
