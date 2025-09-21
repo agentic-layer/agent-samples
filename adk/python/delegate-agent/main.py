@@ -1,10 +1,13 @@
 import os
 
 from agenticlayer.agent_to_a2a import to_a2a
+from agenticlayer.otel import setup_otel
 
 from delegate.agent import root_agent
 
 app = to_a2a(root_agent)
+
+setup_otel()
 
 # Entry point for IDE to start in debug mode
 # Make sure that the IDE uses the .env file
