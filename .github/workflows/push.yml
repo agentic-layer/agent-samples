@@ -41,7 +41,7 @@ jobs:
       - name: 'Configure Docker for Artifact Registry'
         run: gcloud auth configure-docker eu.gcr.io
 
-      - name: 'Docker Push'
+      - name: 'Docker Build & Push'
         working-directory: ${{ matrix.path }}
         run: |
           make docker-push

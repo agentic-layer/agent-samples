@@ -33,7 +33,8 @@ docker-push:
 	- docker buildx create --name agent-builder
 	docker buildx use agent-builder
 	docker buildx build \
-		--push --platform=$(PLATFORMS) \
+		--push \
+		--platform=$(PLATFORMS) \
 		--tag $(IMAGE_TAG_BASE):$(VERSION) \
 		--tag $(IMAGE_TAG_BASE):latest \
 		--cache-to type=gha \
