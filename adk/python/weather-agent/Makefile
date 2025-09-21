@@ -1,5 +1,5 @@
 VERSION ?= $(shell git describe --tags --always | sed 's/^v//')
-IMAGE_TAG_BASE ?= eu.gcr.io/agentic-layer/weather-agent
+IMAGE_TAG_BASE ?= ghcr.io/agentic-layer/weather-agent
 IMG ?= $(IMAGE_TAG_BASE):$(VERSION)
 PLATFORMS ?= linux/arm64,linux/amd64
 
