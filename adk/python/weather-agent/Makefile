@@ -25,7 +25,7 @@ docker-build:
 
 .PHONY: docker-run
 docker-run: docker-build
-	@echo "Agent Card URL: ${A2A_AGENT_CARD_URL}/.well-known/agent-card.json"
+	@echo "Agent Card URL: ${AGENT_A2A_RPC_URL}/.well-known/agent-card.json"
 	docker run --rm -it -p ${UVICORN_PORT}:8000 $(IMG)
 
 .PHONY: docker-push

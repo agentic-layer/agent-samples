@@ -66,7 +66,7 @@ curl http://localhost:8100/ \
 
 The agent can be configured using environment variables:
 
-* `A2A_AGENT_CARD_URL`: Base URL for the Agent-to-Agent communication
+* `AGENT_A2A_RPC_URL`: Base URL for the Agent-to-Agent communication
 * `SUB_AGENTS`: JSON map of sub agents to delegate to. Format: `{"agent_name": {"url": "http://agent-url/.well-known/agent-card.json"}}` (default: empty)
 
 ### Sub Agents Configuration
