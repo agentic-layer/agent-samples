@@ -1,4 +1,4 @@
-VERSION ?= $(shell git describe --tags --always | sed 's/^v//')
+VERSION ?= latest
 IMAGE_TAG_BASE ?= ghcr.io/agentic-layer/weather-agent
 IMG ?= $(IMAGE_TAG_BASE):$(VERSION)
 PLATFORMS ?= linux/arm64,linux/amd64
@@ -27,16 +27,3 @@ docker-build:
 docker-run: docker-build
 	@echo "Agent Card URL: ${AGENT_A2A_RPC_URL}/.well-known/agent-card.json"
 	docker run --rm -it -p ${UVICORN_PORT}:8000 $(IMG)
-
-.PHONY: docker-push
-docker-push:
-	- docker buildx create --name agent-builder
-	docker buildx use agent-builder
-	docker buildx build \
-		--push \
-		--platform=$(PLATFORMS) \
-		--tag $(IMAGE_TAG_BASE):$(VERSION) \
-		--tag $(IMAGE_TAG_BASE):latest \
-		--cache-to type=gha \
-        --cache-from type=gha \
-        .
