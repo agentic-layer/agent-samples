@@ -1,4 +1,4 @@
-FROM python:3.13-slim-trixie AS build_python
+FROM python:3.13-trixie AS build_python
 WORKDIR /app
 
 COPY --from=ghcr.io/astral-sh/uv:0.8 /uv /uvx /bin/
