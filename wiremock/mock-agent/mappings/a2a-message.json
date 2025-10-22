@@ -1,0 +1,80 @@
+{
+  "request": {
+    "method": "POST",
+    "urlPath": "/",
+    "headers": {
+      "Content-Type": {
+        "equalTo": "application/json"
+      }
+    },
+    "bodyPatterns": [
+      {
+        "matchesJsonPath": "$.method",
+        "equalToJson": "\"message/send\""
+      }
+    ]
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "id": "{{jsonPath request.body '$.id'}}",
+      "jsonrpc": "2.0",
+      "result": {
+        "artifacts": [
+          {
+            "artifactId": "{{randomValue type='UUID'}}",
+            "parts": [
+              {
+                "kind": "text",
+                "text": "{{jsonPath request.body '$.params.message.parts[0].text'}}"
+              }
+            ]
+          }
+        ],
+        "contextId": "{{jsonPath request.body '$.params.message.contextId'}}",
+        "history": [
+          {
+            "contextId": "{{jsonPath request.body '$.params.message.contextId'}}",
+            "kind": "message",
+            "messageId": "{{jsonPath request.body '$.params.message.messageId'}}",
+            "parts": [
+              {
+                "kind": "text",
+                "text": "{{jsonPath request.body '$.params.message.parts[0].text'}}"
+              }
+            ],
+            "role": "{{jsonPath request.body '$.params.message.role'}}",
+            "taskId": "{{randomValue type='UUID'}}"
+          },
+          {
+            "kind": "message",
+            "messageId": "{{randomValue type='UUID'}}",
+            "parts": [
+              {
+                "kind": "text",
+                "text": "{{jsonPath request.body '$.params.message.parts[0].text'}}"
+              }
+            ],
+            "role": "agent"
+          }
+        ],
+        "id": "{{randomValue type='UUID'}}",
+        "kind": "task",
+        "metadata": {
+          "adk_app_name": "mock_agent",
+          "adk_author": "mock_agent"
+        },
+        "status": {
+          "state": "completed",
+          "timestamp": "{{now format='yyyy-MM-dd'}}T{{now format='HH:mm:ss'}}"
+        }
+      }
+    },
+    "transformers": [
+      "response-template"
+    ]
+  }
+}

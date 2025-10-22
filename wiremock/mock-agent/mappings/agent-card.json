@@ -1,0 +1,22 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/.well-known/agent-card.json"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "name": "mock_agent",
+      "description": "Mock Agent that echoes back the input text 1:1",
+      "preferredTransport": "JSONRPC",
+      "protocolVersion": "0.3.0",
+      "capabilities": {},
+      "supportsAuthenticatedExtendedCard": false,
+      "url": "{{systemValue type='ENVIRONMENT' key='AGENT_A2A_RPC_URL' default='http://localhost:8080'}}",
+      "version": "0.0.1"
+    }
+  }
+}
