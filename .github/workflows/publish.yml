@@ -29,6 +29,8 @@ jobs:
             path: "adk/python/weather-agent"
           - name: "delegate-agent"
             path: "adk/python/delegate-agent"
+          - name: "mock-agent"
+            path: "wiremock/mock-agent"
 
     steps:
       - name: Checkout repository
