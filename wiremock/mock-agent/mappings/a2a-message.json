@@ -9,8 +9,10 @@
     },
     "bodyPatterns": [
       {
-        "matchesJsonPath": "$.method",
-        "equalToJson": "\"message/send\""
+        "matchesJsonPath": {
+          "expression": "$.method",
+          "equalTo": "message/send"
+        }
       }
     ]
   },
@@ -29,7 +31,7 @@
             "parts": [
               {
                 "kind": "text",
-                "text": "{{jsonPath request.body '$.params.message.parts[0].text'}}"
+                "text": "Echo: {{jsonPath request.body '$.params.message.parts[0].text'}}"
               }
             ]
           }
@@ -55,7 +57,7 @@
             "parts": [
               {
                 "kind": "text",
-                "text": "{{jsonPath request.body '$.params.message.parts[0].text'}}"
+                "text": "Echo: {{jsonPath request.body '$.params.message.parts[0].text'}}"
               }
             ],
             "role": "agent"
