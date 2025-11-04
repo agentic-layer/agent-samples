@@ -15,7 +15,7 @@
       "protocolVersion": "0.3.0",
       "capabilities": {},
       "supportsAuthenticatedExtendedCard": false,
-      "url": "{{systemValue type='ENVIRONMENT' key='AGENT_A2A_RPC_URL' default='http://localhost:8080'}}",
+      "url": "{{systemValue type='ENVIRONMENT' key='AGENT_A2A_RPC_URL' default='http://localhost:8000'}}",
       "version": "0.0.1"
     }
   }

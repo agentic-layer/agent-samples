@@ -12,7 +12,7 @@ docker-build:
 
 .PHONY: docker-run
 docker-run: docker-build
-	@echo "Starting Mock Agent on port 8080"
-	@echo "Agent Card URL: http://localhost:8080/.well-known/agent-card.json"
-	@echo "Health Check URL: http://localhost:8080/health"
-	docker run --rm -it -p 8080:8080 $(IMG)
+	@echo "Starting Mock Agent on port 8000"
+	@echo "Agent Card URL: http://localhost:8000/.well-known/agent-card.json"
+	@echo "Health Check URL: http://localhost:8000/health"
+	docker run --rm -it -p 8000:8000 $(IMG)

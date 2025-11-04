@@ -28,20 +28,20 @@ Build and run the agent with:
 # Build Docker image
 make docker-build
 
-# Run the agent (accessible on port 8080)
+# Run the agent (accessible on port 8000)
 make docker-run
 ```
 
 After successful start, the agent will be available at:
 
-* **Server**: http://localhost:8080
-* **Agent Card**: http://localhost:8080/.well-known/agent-card.json
-* **Health Check**: http://localhost:8080/health
+* **Server**: http://localhost:8000
+* **Agent Card**: http://localhost:8000/.well-known/agent-card.json
+* **Health Check**: http://localhost:8000/health
 
 Ask the agent a question using curl:
 
 ```shell
-curl http://localhost:8080/ \
+curl http://localhost:8000/ \
     -H "Content-Type: application/json" \
     -d '{
       "jsonrpc": "2.0",
@@ -138,7 +138,7 @@ You can override the default configuration by mounting a custom 'mappings' direc
 
 ```shell
 docker run --rm -it \
-    -p 8080:8080 \
+    -p 8000:8000 \
     -v $(pwd)/custom-mapping-directory:/home/wiremock/mappings \
     ghcr.io/agentic-layer/mock-agent:latest
 ```
