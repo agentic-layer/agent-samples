@@ -33,7 +33,7 @@ def create_sub_agents():
 
 root_agent = Agent(
     name="delegate_agent",
-    model=LiteLlm("gemini/gemini-2.0-flash"),
+    model=LiteLlm("gemini/gemini-2.5-flash"),
     description=(
         "Agent to delegate to other agents."
     ),
