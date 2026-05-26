@@ -19,6 +19,7 @@ jobs:
           - path: "adk/python/weather-agent"
           - path: "adk/python/delegate-agent"
           - path: "wiremock/mock-agent"
+          - path: "mcp-servers"
 
     steps:
       - name: 'Checkout'

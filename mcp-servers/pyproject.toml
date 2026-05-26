@@ -1,0 +1,45 @@
+[project]
+name = "mcp-servers"
+version = "0.1.0"
+requires-python = ">=3.14,<3.15"
+dependencies = [
+    "fastmcp>=3.1.0",
+    "opentelemetry-sdk>=1.28.0",
+    "opentelemetry-exporter-otlp-proto-http>=1.28.0",
+    "opentelemetry-exporter-otlp-proto-grpc>=1.28.0",
+    "opentelemetry-instrumentation-logging>=0.61b0",
+    "opentelemetry-instrumentation-starlette>=0.61b0",
+    "opentelemetry-instrumentation-httpx>=0.61b0",
+]
+
+[dependency-groups]
+dev = [
+    "poethepoet>=0.31.1",
+    "mypy>=1.17.0",
+    "ruff>=0.12.7",
+    "pytest>=8.1.1",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[tool.poe.tasks]
+test = "pytest --strict-config"
+
+format = "ruff format"
+lint = "ruff check --fix"
+ruff = ["format", "lint"]
+
+mypy = "mypy ."
+
+check = ["mypy", "ruff"]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+extend-select = ["Q", "N", "I001", "PT", "TID251", "DTZ"]
