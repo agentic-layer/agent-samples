@@ -3,7 +3,7 @@ FROM python:3.14-slim-trixie
 WORKDIR /app
 
 # Install uv
-COPY --from=ghcr.io/astral-sh/uv:0.11 /uv /bin/uv
+COPY --from=ghcr.io/astral-sh/uv:0.12 /uv /bin/uv
 
 # Install dependencies
 COPY pyproject.toml uv.lock ./
